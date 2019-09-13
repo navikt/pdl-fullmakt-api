@@ -71,7 +71,7 @@ commands:
                 --var version=$IMAGE_VERSION \
                 --key=gh_deploy_key.pem \
                 --ref=$COMMIT_SHORT \
-                --appid=34043
+                --appid=40456
 
   sett-miljovariabler:
     steps:
