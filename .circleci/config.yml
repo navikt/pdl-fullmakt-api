@@ -69,7 +69,7 @@ commands:
                 --var ingress2=<< parameters.ingress2 >> \
                 --var reponame=$REPO_NAME \
                 --var version=$IMAGE_VERSION \
-                --key=java11-{{ checksum ".circleci/install_java.sh" }} \
+                --key=gh_deploy_key.pem \
                 --ref=$COMMIT_SHORT \
                 --appid=40456
 
