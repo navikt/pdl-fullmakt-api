@@ -1,1 +1,0 @@
-deployment-cli deploy create --cluster=dev-fss --repository=nais/testapp --version=latest --team pdl-fullmakt --resource=./hack/nais.yaml --appid=21324 --key=./pdl-fullmakt.key

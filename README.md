@@ -1,2 +1,2 @@
 # pdl-fullmakt-api
-Backend for NAV ny [fullmakt](https://github.com/navikt/pdl-fullmakt-ui)
+Proxy mot FSS for [fullmakt](https://github.com/navikt/pdl-fullmakt-ui)
