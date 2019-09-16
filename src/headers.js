@@ -2,7 +2,6 @@
   Set headers for proxy requests
  */
 
-
 const setProxyHeaders = (proxyReq, req, res) => {
   const authToken = req.cookies["selvbetjening-idtoken"];
 
