@@ -12,18 +12,6 @@ const { setEnheterProxyHeaders, setMottakProxyHeaders } = require("./headers");
 app.use(cookies());
 app.get(`${BASE_URL}/internal/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${BASE_URL}/internal/isReady`, (req, res) => res.sendStatus(200));
-app.get(`${BASE_URL}/fodselsnr`, (req, res) =>
-  res.send({ fodselsnr: decodeJWT(req.cookies["selvbetjening-idtoken"]).sub })
-);
-
-app.use(
-  proxy(`${BASE_URL}/enheter`, {
-    target: process.env.ENHETERRS_URL,
-    pathRewrite: { "^/person/pdl-fullmakt-api/enheter": "" },
-    onProxyReq: setEnheterProxyHeaders,
-    changeOrigin: true
-  })
-);
 
 app.use(
   proxy(`${BASE_URL}/mottak`, {
