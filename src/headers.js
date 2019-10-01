@@ -2,14 +2,7 @@
   Set headers for proxy requests
  */
 
-const setEnheterProxyHeaders = (proxyReq, req, res) => {
-  proxyReq.setHeader(
-    process.env.PDL_FULLMAKT_API_ENHETERRS_APIKEY_USERNAME,
-    process.env.PDL_FULLMAKT_API_ENHETERRS_APIKEY_PASSWORD
-  );
-};
-
-const setMottakProxyHeaders = (proxyReq, req, res) => {
+const setProxyHeaders = (proxyReq, req, res) => {
   const authToken = req.cookies["selvbetjening-idtoken"];
 
   if (authToken) {
@@ -27,6 +20,5 @@ const setMottakProxyHeaders = (proxyReq, req, res) => {
 };
 
 module.exports = {
-  setEnheterProxyHeaders,
-  setMottakProxyHeaders
+  setProxyHeaders
 };

@@ -1,4 +1,5 @@
-[![CircleCI](https://circleci.com/gh/navikt/pdl-fullmakt-api.svg?style=svg&circle-token=deaa249d91e9850bdcf347c0aa29240c50d76e3a)](https://circleci.com/gh/navikt/pdl-fullmakt-api)
+
+[![CircleCI](https://circleci.com/gh/navikt/pdl-fullmakt-api.svg?style=svg)](https://circleci.com/gh/navikt/pdl-fullmakt-api)
 
 # pdl-fullmakt-api
 
