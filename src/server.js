@@ -16,7 +16,7 @@ app.get(`${BASE_URL}/internal/isReady`, (req, res) => res.sendStatus(200));
 app.use(
   proxy(`${BASE_URL}/api`, {
     target: process.env.PDL_FULLMAKT_API_URL,
-    pathRewrite: { "^/person/pdl-fullmakt-api/api": "" },
+    pathRewrite: { "^/person/pdl-fullmakt-api/fullmaktsgiver": "" },
     onProxyReq: setProxyHeaders,
     changeOrigin: true
   })
