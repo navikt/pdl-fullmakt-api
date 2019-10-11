@@ -10,8 +10,8 @@ const setProxyHeaders = (proxyReq, req, res) => {
   }
 
   proxyReq.setHeader(
-    process.env.PDL_FULLMAKT_API_TILBAKEMELDINGSMOTTAK_APIKEY_USERNAME,
-    process.env.PDL_FULLMAKT_API_TILBAKEMELDINGSMOTTAK_APIKEY_PASSWORD
+    process.env.PDL_FULLMAKT_API_PDL_FULLMAKT_KEY_USERNAME,
+    process.env.PDL_FULLMAKT_API_PDL_FULLMAKT_KEY_PASSWORD
   );
 
   Object.keys(req.headers).forEach(key => {

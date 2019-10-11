@@ -14,9 +14,9 @@ app.get(`${BASE_URL}/internal/isAlive`, (req, res) => res.sendStatus(200));
 app.get(`${BASE_URL}/internal/isReady`, (req, res) => res.sendStatus(200));
 
 app.use(
-  proxy(`${BASE_URL}/mottak`, {
-    target: process.env.TILBAKEMELDINGSMOTTAK_URL,
-    pathRewrite: { "^/person/pdl-fullmakt-api/mottak": "" },
+  proxy(`${BASE_URL}/api`, {
+    target: process.env.PDL_FULLMAKT_API_URL,
+    pathRewrite: { "^/person/pdl-fullmakt-api/api": "" },
     onProxyReq: setProxyHeaders,
     changeOrigin: true
   })
