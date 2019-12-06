@@ -23,11 +23,7 @@ app.use(
     target: process.env.PDL_FULLMAKT_API_URL,
     pathRewrite: { "^/person/pdl-fullmakt-api": "" },
     onProxyReq: setProxyHeaders,
-    changeOrigin: true,
-    proxyErrorHandler: function(err, res, next) {
-      console.error("Error in pdl-fullmakt-api proxy", err)
-      next(err);
-    }
+    changeOrigin: true
   })
 );
 
