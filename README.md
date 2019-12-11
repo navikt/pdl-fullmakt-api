@@ -28,13 +28,6 @@ Godkjenn produksjonssettingen i [CircleCI](https://circleci.com/gh/navikt/workfl
 Erstatt følgende:
 * OIDC-TOKEN med cookie "selvbetjening-idtoken" etter å ha logget på https://www-q0.nav.no/person/pdl-fullmakt-ui.
 * FNR for pålogget bruker.
-* STS-TOKEN for systembruker. Kan hentes ut via kall:
-
-```
-curl --insecure --user srvpersonopplysnin:PASSORD "https://security-token-service.nais.preprod.local/rest/v1/sts/token?grant_type=client_credentials&scope=openid" --header "accept: application/json"
-```
-
-* PASSORD slås opp i vault.
 
 
 ## Logging
