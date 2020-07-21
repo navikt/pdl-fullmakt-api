@@ -34,8 +34,8 @@ jobs:
   deploy-dev:
     name: Deploy to NAIS dev-sbs
     needs: build-app
-    # if: startsWith(github.ref, 'refs/heads/dev')
-    if: github.ref == 'refs/heads/master'
+    if: startsWith(github.ref, 'refs/heads/dev')
+    #    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -45,15 +45,15 @@ jobs:
           CLUSTER: dev-sbs
           RESOURCE: .nais/dev-sbs-nais.yaml
 
-#  deploy-prod:
-#    name: Deploy to NAIS prod-sbs
-#    needs: build-app
-#    if: github.ref == 'refs/heads/master'
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v1
-#      - uses: nais/deploy/actions/deploy@v1
-#        env:
-#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-#          CLUSTER: prod-sbs
-#          RESOURCE: .nais/prod-sbs-nais.yaml
+  deploy-prod:
+    name: Deploy to NAIS prod-sbs
+    needs: build-app
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-sbs
+          RESOURCE: .nais/prod-sbs-nais.yaml
