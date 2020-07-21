@@ -1,0 +1,30 @@
+apiVersion: 'nais.io/v1alpha1'
+kind: 'Application'
+metadata:
+  name: pdl-fullmakt-api
+  namespace: default
+  cluster: dev-sbs
+  labels:
+    team: pdlfullmakt
+spec:
+  image: {{image}}
+  port: 8080
+  liveness:
+    path: person/pdl-fullmakt-api/internal/isAlive
+    initialDelay: 20
+  readiness:
+    path: person/pdl-fullmakt-api/internal/isReady
+    initialDelay: 20
+  replicas:
+    min: 2
+    max: 4
+    cpuThresholdPercentage: 50
+  prometheus:
+    enabled: true
+    path: person/pdl-fullmakt-api/internal/metrics
+  ingresses:
+    - https://pdl-fullmakt-api.dev-sbs.nais.io
+    - https://www-q0.nav.no/person/pdl-fullmakt-api
+  webproxy: true
+  vault:
+    enabled: true
