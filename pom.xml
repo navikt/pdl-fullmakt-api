@@ -13,11 +13,17 @@
 		<kotlin.code.style>official</kotlin.code.style>
 		<kotlin_version>1.6.10</kotlin_version>
 		<logback_version>1.2.5</logback_version>
+		<unleash.client.java_version>4.4.1</unleash.client.java_version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 		<main.class>com.example.PdlFullmaktApiApplicationKt</main.class>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>no.finn.unleash</groupId>
+			<artifactId>unleash-client-java</artifactId>
+			<version>${unleash.client.java_version}</version>
+		</dependency>
 		<dependency>
 			<groupId>io.ktor</groupId>
 			<artifactId>ktor-server-core</artifactId>
