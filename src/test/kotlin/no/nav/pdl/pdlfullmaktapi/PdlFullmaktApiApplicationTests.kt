@@ -1,13 +1,17 @@
 package no.nav.pdl.pdlfullmaktapi
 
-import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
+import io.ktor.application.*
+import io.ktor.response.*
+import io.ktor.routing.*
 
-@SpringBootTest
-class PdlFullmaktApiApplicationTests {
+fun Application.configureRouting() {
 
-	@Test
-	fun contextLoads() {
+	// Starting point for a Ktor app:
+	routing {
+		get("/") {
+			call.respondText("Hello World!")
+		}
 	}
-
+	routing {
+	}
 }

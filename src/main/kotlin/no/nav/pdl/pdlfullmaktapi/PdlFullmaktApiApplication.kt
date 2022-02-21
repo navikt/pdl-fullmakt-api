@@ -1,11 +1,11 @@
 package no.nav.pdl.pdlfullmaktapi
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-
-@SpringBootApplication
-class PdlFullmaktApiApplication
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import no.nav.pdl.pdlfullmaktapi.plugins.configureRouting
 
 fun main(args: Array<String>) {
-	runApplication<PdlFullmaktApiApplication>(*args)
+	embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
+		configureRouting()
+	}.start(wait = true)
 }
