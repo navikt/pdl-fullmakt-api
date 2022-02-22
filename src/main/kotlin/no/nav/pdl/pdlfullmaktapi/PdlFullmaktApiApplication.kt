@@ -1,11 +1,11 @@
 package no.nav.pdl.pdlfullmaktapi
 
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
+import io.ktor.application.*
 import no.nav.pdl.pdlfullmaktapi.plugins.configureRouting
 
-fun main(args: Array<String>) {
-	embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-		configureRouting()
-	}.start(wait = true)
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+
+@Suppress("unused") // Referenced in application.conf
+fun Application.module(){
+    configureRouting()
 }
