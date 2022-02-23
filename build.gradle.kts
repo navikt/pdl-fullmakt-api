@@ -28,12 +28,15 @@ dependencies {
     // Ktor Server
     implementation(ktor("server-core"))
     implementation(ktor("server-netty"))
+    implementation(ktor("auth"))
+    implementation(ktor("auth-jwt"))
 
     // Ktor Client
     implementation(ktor("client-core"))
     implementation(ktor("client-apache"))
     implementation(ktor("client-jackson"))
     implementation(ktor("client-logging"))
+    implementation(ktor("client-auth"))
 
     implementation("no.finn.unleash:unleash-client-java:$unleashClientJavaVersion")
 
