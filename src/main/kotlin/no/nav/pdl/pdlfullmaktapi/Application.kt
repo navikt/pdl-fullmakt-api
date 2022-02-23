@@ -5,12 +5,13 @@ import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
-import no.nav.pdl.pdlfullmaktapi.plugins.configureRouting
 import io.ktor.jackson.JacksonConverter
 import io.ktor.request.*
 import io.ktor.routing.*
 import no.finn.unleash.FakeUnleash
+import no.nav.pdl.pdlfullmaktapi.routes.foedselsnummer
 import no.nav.pdl.pdlfullmaktapi.routes.internal
+import no.nav.pdl.pdlfullmaktapi.unleash.UnleashConfig
 import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -42,10 +43,11 @@ fun Application.module(){
             }
             isProd -> {
                 authenticate("tokenX"){
-
+                    foedselsnummer(UnleashConfig.unleash)
                 }
             }
         }
+
     }
     applicationStatus.initialized = true
 

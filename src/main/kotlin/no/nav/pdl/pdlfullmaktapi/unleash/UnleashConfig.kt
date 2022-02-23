@@ -16,9 +16,10 @@ class UnleashConfig {
             .instanceId("")
             .unleashAPI("https://unleash.nais.io/api/")
             .build()
+        val unleash: Unleash = DefaultUnleash(config, ByClusterStrategy(Cluster.current))
     }
 
-    val unleash: Unleash = DefaultUnleash(config, ByClusterStrategy(Cluster.current))
+
 
     class ByClusterStrategy(private val currentCluster: Cluster) : Strategy {
         override fun getName(): String = "byCluster"
