@@ -1,6 +1,7 @@
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
+val micrometer_version: String by project
 val unleashClientJavaVersion = "4.4.1"
 
 plugins {
@@ -40,6 +41,7 @@ dependencies {
     implementation(ktor("client-auth"))
 
     implementation("no.finn.unleash:unleash-client-java:$unleashClientJavaVersion")
+    implementation("io.micrometer:micrometer-registry-prometheus:$micrometer_version")
 
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")

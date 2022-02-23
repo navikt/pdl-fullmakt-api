@@ -4,6 +4,7 @@ import com.auth0.jwk.JwkProviderBuilder
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.auth.jwt.*
+import io.ktor.http.auth.*
 import java.net.URL
 import java.util.concurrent.TimeUnit
 
@@ -19,6 +20,12 @@ fun Application.installAuthentication(config: Config.TokenX) {
     install(Authentication){
         jwt("tokenX"){
             verifier(jwkProvider, config.metadata.issuer)
+            realm = "pdl-fullmakt-api"
+            authHeader {
+                val cookie = it.request.cookies["selvbetjening-idtoken"]
+                    ?: throw CookieNotSetException("Cookie with name selvbetjening-idtoken not found")
+                HttpAuthHeader.Single("Bearer", cookie)
+            }
             validate { credentials ->
                 try{
                     requireNotNull(credentials.payload.audience) {
@@ -37,3 +44,5 @@ fun Application.installAuthentication(config: Config.TokenX) {
     }
 
 }
+
+class CookieNotSetException(override val message: String?) : RuntimeException(message)

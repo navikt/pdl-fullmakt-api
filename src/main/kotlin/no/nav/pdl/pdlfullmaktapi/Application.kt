@@ -1,6 +1,7 @@
 package no.nav.pdl.pdlfullmaktapi
 
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
@@ -8,6 +9,7 @@ import no.nav.pdl.pdlfullmaktapi.plugins.configureRouting
 import io.ktor.jackson.JacksonConverter
 import io.ktor.request.*
 import io.ktor.routing.*
+import no.finn.unleash.FakeUnleash
 import no.nav.pdl.pdlfullmaktapi.routes.internal
 import org.slf4j.event.Level
 
@@ -32,9 +34,23 @@ fun Application.module(){
 
     routing {
         internal(readySelfTestCheck={applicationStatus.initialized}, aLiveSelfTestCheck={applicationStatus.running})
+        when {
+            isDev -> {
+                val unleash = FakeUnleash().apply {
+                    enableAll()
+                }
+            }
+            isProd -> {
+                authenticate("tokenX"){
 
+                }
+            }
+        }
     }
     applicationStatus.initialized = true
 
 }
 
+val Application.envKind get() = environment.config.property("ktor.environment").getString()
+val Application.isDev get() = envKind == "dev"
+val Application.isProd get() = envKind != "dev"
