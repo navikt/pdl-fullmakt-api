@@ -1,1 +1,1 @@
-rootProject.name = "ktor-sample-groovy"
+rootProject.name = "pdl-fullmakt-api"

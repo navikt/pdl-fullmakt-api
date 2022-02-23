@@ -11,20 +11,38 @@ plugins {
 group = "no.nav.pdl"
 version = "0.0.1-SNAPSHOT"
 application {
-    mainClass.set("no.nav.pdl.pdlfullmaktapi.PdlFullmaktApiApplicationKt")
+    mainClass.set("no.nav.pdl.pdlfullmaktapi.ApplicationKt")
 }
 
 repositories {
     mavenCentral()
 }
 
+fun ktor(name: String) = "io.ktor:ktor-$name:$ktor_version"
+
 dependencies {
-    implementation("io.ktor:ktor-server-core:$ktor_version")
-    implementation("io.ktor:ktor-server-netty:$ktor_version")
+    // Logging
+    implementation("io.github.microutils:kotlin-logging:2.1.21")
     implementation("ch.qos.logback:logback-classic:$logback_version")
+
+    // Ktor Server
+    implementation(ktor("server-core"))
+    implementation(ktor("server-netty"))
+
+    // Ktor Client
+    implementation(ktor("client-core"))
+    implementation(ktor("client-apache"))
+    implementation(ktor("client-jackson"))
+    implementation(ktor("client-logging"))
 
     implementation("no.finn.unleash:unleash-client-java:$unleashClientJavaVersion")
 
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
+
+kotlin.sourceSets["main"].kotlin.srcDirs("src")
+kotlin.sourceSets["test"].kotlin.srcDirs("test")
+
+sourceSets["main"].resources.srcDirs("resources")
+sourceSets["test"].resources.srcDirs("testresources")
