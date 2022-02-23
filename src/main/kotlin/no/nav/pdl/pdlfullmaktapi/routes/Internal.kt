@@ -12,7 +12,7 @@ const val IS_READY = "/isReady"
 
 inline fun Route.internal(
     crossinline readySelfTestCheck: () -> Boolean,
-    crossinline  aLiveSelfTestCheck: () -> Boolean = {true}
+    crossinline aLiveSelfTestCheck: () -> Boolean = {true}
 ) {
     route(INTERNAL){
         get(IS_ALIVE){
