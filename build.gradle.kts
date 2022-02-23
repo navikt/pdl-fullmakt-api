@@ -30,6 +30,7 @@ dependencies {
     implementation(ktor("server-netty"))
     implementation(ktor("auth"))
     implementation(ktor("auth-jwt"))
+    implementation(ktor("jackson"))
 
     // Ktor Client
     implementation(ktor("client-core"))
