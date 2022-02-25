@@ -39,6 +39,7 @@ fun Application.module(){
             isDev -> {
                 val unleash = FakeUnleash().apply {
                     enableAll()
+                    println("Am at dev")
                 }
             }
             isProd -> {
@@ -50,6 +51,7 @@ fun Application.module(){
 
     }
     applicationStatus.initialized = true
+    log.debug("Application started")
 
 }
 
