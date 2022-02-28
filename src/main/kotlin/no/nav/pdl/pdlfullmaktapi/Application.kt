@@ -39,7 +39,6 @@ fun Application.module(){
             isDev -> {
                 val unleash = FakeUnleash().apply {
                     enableAll()
-                    println("Am at dev")
                 }
             }
             isProd -> {

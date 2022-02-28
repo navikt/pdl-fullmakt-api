@@ -1,0 +1,54 @@
+# Example https://github.com/nais/naiserator/blob/master/examples/nais-max.yaml
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: {{app}}
+  namespace: {{namespace}}
+  labels:
+    team: {{team}}
+    app: {{app}}
+spec:
+  azure:
+    application:
+      enabled: true
+  image: {{image}}
+  port: {{PORT}}
+  liveness:
+    path: /internal/isAlive
+    initialDelay: 20
+    timeout: 1
+    periodSeconds: 5
+    failureThreshold: 10
+  readiness:
+    path: /internal/isReady
+    initialDelay: 20
+    timeout: 1
+  prometheus:
+    enabled: true
+    path: /internal/metrics
+  replicas:
+    min: 2
+    max: 6
+    cpuThresholdPercentage: 75
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+    requests:
+      cpu: 300m
+      memory: 512Mi
+  {{ingressess}}
+  sessionAffinity: ClientIP # Sticky Session for ingress controller to prevent 404 on rollout
+  envFrom:
+    - secret: dp-kalkulator-api-config
+    - configmap: loginservice-idporten
+  {{accesspolicies}}
+  env:
+    - name: API_GATEWAY_URL
+      value: {{API_GATEWAY_URL}}
+    - name: APP_BASEPATH
+      value: /arbeid/dagpenger/api/kalkulator
+    - name: KTOR_ENV
+      value: {{KTOR_ENV}}
+    - name: PORT
+      value: {{PORT}}

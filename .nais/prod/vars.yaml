@@ -1,0 +1,18 @@
+app: pdl-fullmakt-api
+namespace: default
+team: pdlfullmakt
+API_GATEWAY_URL: "https://api-gw-q1.oera.no/dp-reverse-proxy/"
+KTOR_ENV: prod
+PORT: 8088
+accesspolicies: |
+  accessPolicy:
+      outbound:
+        external:
+          - host: api-gw-q1.oera.no
+          - host: login.microsoftonline.com
+          - host: navtestb2c.b2clogin.com
+          - host: dp-proxy.dev-fss-pub.nais.io
+ingressess: |
+  ingresses:
+    - https://pdl-fullmakt-api.nais.oera.no
+    - https://www.nav.no/person/pdl-fullmakt-api

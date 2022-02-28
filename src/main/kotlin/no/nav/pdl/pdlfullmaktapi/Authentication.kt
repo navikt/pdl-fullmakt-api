@@ -1,6 +1,7 @@
 package no.nav.pdl.pdlfullmaktapi
 
 import com.auth0.jwk.JwkProviderBuilder
+import com.auth0.jwt.interfaces.Payload
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.auth.jwt.*
@@ -28,11 +29,8 @@ fun Application.installAuthentication(config: Config.TokenX) {
             }
             validate { credentials ->
                 try{
-                    requireNotNull(credentials.payload.audience) {
-                        "Auth: Missing audience in token"
-                    }
-                    require(credentials.payload.audience.contains(config.clientId)){
-                        "Auth: Valid audience not found in claims"
+                    requireNotNull(credentials.payload.getSubjectFromPidOrSub()) {
+                        "Auth: Missing subject in token"
                     }
                     JWTPrincipal(credentials.payload)
                 } catch (e: Throwable) {
@@ -43,6 +41,10 @@ fun Application.installAuthentication(config: Config.TokenX) {
         }
     }
 
+}
+
+private fun Payload.getSubjectFromPidOrSub(): String? {
+    return this.getClaim("pid").asString() ?: this.getClaim("sub").asString()
 }
 
 class CookieNotSetException(override val message: String?) : RuntimeException(message)
