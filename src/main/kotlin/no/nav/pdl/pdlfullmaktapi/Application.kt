@@ -43,7 +43,7 @@ fun Application.module(){
             }
             isProd -> {
                 authenticate("tokenX"){
-                    foedselsnummer(UnleashConfig.unleash)
+                    foedselsnummer()
                 }
             }
         }
