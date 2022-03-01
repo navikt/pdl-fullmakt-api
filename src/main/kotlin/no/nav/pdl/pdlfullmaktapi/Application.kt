@@ -11,7 +11,7 @@ import io.ktor.routing.*
 import no.finn.unleash.FakeUnleash
 import no.nav.pdl.pdlfullmaktapi.routes.foedselsnummer
 import no.nav.pdl.pdlfullmaktapi.routes.internal
-import no.nav.pdl.pdlfullmaktapi.unleash.UnleashConfig
+
 import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -40,6 +40,7 @@ fun Application.module(){
                 val unleash = FakeUnleash().apply {
                     enableAll()
                 }
+                print("It is dev environment")
             }
             isProd -> {
                 authenticate("tokenX"){
