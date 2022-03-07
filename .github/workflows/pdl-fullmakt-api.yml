@@ -1,5 +1,11 @@
 name: Build and Deploy pdl-fullmakt-api
 
+on:
+  push:
+    branches:
+      - 'master'
+      - 'dev/*'
+
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/pdl-fullmakt-api:${{ github.sha }}
 
@@ -32,8 +38,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker build --tag ${IMAGE} .
-          echo "$GITHUB_TOKEN" | docker login --username "$GITHUB_REPOSITORY" --password-stdin https://docker.pkg.github.com
+          docker build -t ${IMAGE} .
+          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           docker push ${IMAGE}
 
   deploy-dev:
