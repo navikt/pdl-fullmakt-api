@@ -1,6 +1,5 @@
 name: Build and Deploy pdl-fullmakt-api
 
-
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/pdl-fullmakt-api:${{ github.sha }}
 
@@ -11,18 +10,44 @@ jobs:
     if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev')
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Set node environment
-        uses: actions/setup-node@v1
+        uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
         with:
-          node-version: 11
-      - run: npm ci
-      - run: npm test
+          java-version: 17
+      - name: Setup gradle dependency cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build and Run tests
+        run: ./gradlew clean build
 
       - name: Build and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker build -t ${IMAGE} .
-          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+          docker build --tag ${IMAGE} .
+          echo "$GITHUB_TOKEN" | docker login --username "$GITHUB_REPOSITORY" --password-stdin https://docker.pkg.github.com
           docker push ${IMAGE}
+
+  deploy-dev:
+    name: Deploy to dev-gcp
+    needs: build
+    if: startsWith(github.ref, 'refs/heads/dev') || github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        name: Checkout code
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-gcp
+          RESOURCE: nais/nais.yaml
+          VARS: nais/dev/vars.yaml
+          PRINT_PAYLOAD: true
