@@ -52,7 +52,6 @@ fun Application.module(){
     }
     applicationStatus.initialized = true
     log.debug("Application started")
-
 }
 
 val Application.envKind get() = environment.config.property("ktor.environment").getString()
