@@ -45,5 +45,3 @@ spec:
       value: {{API_GATEWAY_URL}}
     - name: KTOR_ENV
       value: {{KTOR_ENV}}
-    - name: PORT
-      value: {{PORT}}
