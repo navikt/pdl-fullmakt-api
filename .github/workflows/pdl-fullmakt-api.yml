@@ -39,18 +39,3 @@ jobs:
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           docker push ${IMAGE}
 
-  deploy-dev:
-    name: Deploy to dev-gcp
-    needs: build
-    if: startsWith(github.ref, 'refs/heads/dev') || github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2.4.0
-        name: Checkout code
-      - uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
-          RESOURCE: nais/nais.yaml
-          VARS: nais/dev/vars.yaml
-          PRINT_PAYLOAD: true
