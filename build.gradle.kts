@@ -9,10 +9,10 @@ plugins {
     kotlin("jvm") version "1.6.10"
 }
 
-group = "no.nav.pdl"
-version = "0.0.1-SNAPSHOT"
+group = "no.nav.pdl.pdlfullmaktapi"
+
 application {
-    mainClass.set("no.nav.pdl.pdlfullmaktapi.ApplicationKt")
+    mainClass.set("io.ktor.server.netty.EngineMain")
 }
 
 java {
@@ -57,3 +57,26 @@ kotlin.sourceSets["test"].kotlin.srcDirs("test")
 
 sourceSets["main"].resources.srcDirs("resources")
 sourceSets["test"].resources.srcDirs("testresources")
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "17"
+}
+
+tasks.named<Jar>("jar") {
+    archiveBaseName.set("app")
+
+    manifest {
+        attributes["Main-Class"] = application.mainClass
+        attributes["Class-Path"] = configurations.runtimeClasspath.get().joinToString(separator = " ") {
+            it.name
+        }
+    }
+
+    doLast {
+        configurations.runtimeClasspath.get().forEach {
+            val file = File("$buildDir/libs/${it.name}")
+            if (!file.exists())
+                it.copyTo(file)
+        }
+    }
+}
