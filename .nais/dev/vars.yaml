@@ -1,5 +1,5 @@
 app: pdl-fullmakt-api
-namespace: pdlfullmakt
+namespace: pdl
 team: pdl
 API_GATEWAY_URL: "https://api-gw-q1.oera.no/dp-reverse-proxy/"
 KTOR_ENV: dev
