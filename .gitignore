@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 /.gradle
+.DS_store
 
 ### STS ###
 .apt_generated
