@@ -2,11 +2,6 @@ name: Build and Deploy pdl-fullmakt-api
 
 on:
   push:
-    branches:
-      - 'master'
-      - 'dev/*'
-    paths:
-      - 'src/**'
 
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/pdl-fullmakt-api:${{ github.sha }}
