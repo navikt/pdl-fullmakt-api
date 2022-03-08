@@ -14,21 +14,21 @@ spec:
   image: {{image}}
   port: {{PORT}}
   liveness:
-    path: /internal/isAlive
+    path: person/pdl-fullmakt-ui/internal/isAlive
     initialDelay: 20
     timeout: 1
     periodSeconds: 5
     failureThreshold: 10
   readiness:
-    path: /internal/isReady
+    path: person/pdl-fullmakt-ui/internal/isReady
     initialDelay: 20
     timeout: 1
   prometheus:
     enabled: true
-    path: /internal/metrics
+    path: person/pdl-fullmakt-ui/internal/metrics
   replicas:
     min: 2
-    max: 6
+    max: 4
     cpuThresholdPercentage: 75
   resources:
     limits:
@@ -39,15 +39,10 @@ spec:
       memory: 512Mi
   {{ingressess}}
   sessionAffinity: ClientIP # Sticky Session for ingress controller to prevent 404 on rollout
-  envFrom:
-    - secret: dp-kalkulator-api-config
-    - configmap: loginservice-idporten
   {{accesspolicies}}
   env:
     - name: API_GATEWAY_URL
       value: {{API_GATEWAY_URL}}
-    - name: APP_BASEPATH
-      value: /arbeid/dagpenger/api/kalkulator
     - name: KTOR_ENV
       value: {{KTOR_ENV}}
     - name: PORT
