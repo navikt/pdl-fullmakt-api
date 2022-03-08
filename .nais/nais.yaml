@@ -14,13 +14,13 @@ spec:
   image: {{image}}
   port: {{PORT}}
   liveness:
-    path: person/pdl-fullmakt-ui/internal/isAlive
+    path: person/pdl-fullmakt-api/internal/isAlive
     initialDelay: 20
     timeout: 1
     periodSeconds: 5
     failureThreshold: 10
   readiness:
-    path: person/pdl-fullmakt-ui/internal/isReady
+    path: person/pdl-fullmakt-api/internal/isReady
     initialDelay: 20
     timeout: 1
   prometheus:
