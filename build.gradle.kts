@@ -3,6 +3,7 @@ val kotlin_version: String by project
 val logback_version: String by project
 val micrometer_version: String by project
 val unleashClientJavaVersion = "4.4.1"
+val tms_ktor_token_version = "2022.02.10-11.14-86260e6f073b"
 
 plugins {
     application
@@ -22,6 +23,7 @@ java {
 
 repositories {
     mavenCentral()
+    maven ("https://jitpack.io")
 }
 
 fun ktor(name: String) = "io.ktor:ktor-$name:$ktor_version"
@@ -45,6 +47,7 @@ dependencies {
     implementation(ktor("client-logging"))
     implementation(ktor("client-auth"))
 
+    implementation("com.github.navikt.tms-ktor-token-support:token-support-tokendings-exchange:$tms_ktor_token_version")
     implementation("no.finn.unleash:unleash-client-java:$unleashClientJavaVersion")
     implementation("io.micrometer:micrometer-registry-prometheus:$micrometer_version")
 
