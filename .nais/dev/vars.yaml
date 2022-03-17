@@ -16,3 +16,5 @@ ingressess: |
   ingresses:
     - https://pdl-fullmakt-api.dev-sbs.nais.io
     - https://www-q0.nav.no/person/pdl-fullmakt-api
+
+TOKEN_X_WELL_KNOWN_URL: https://tokendings.dev-gcp.nais.io/.well-known/oauth-authorization-server

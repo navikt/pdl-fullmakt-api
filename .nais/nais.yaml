@@ -40,8 +40,11 @@ spec:
   {{ingressess}}
   sessionAffinity: ClientIP # Sticky Session for ingress controller to prevent 404 on rollout
   {{accesspolicies}}
+  tokenx:
+    enabled: true
   env:
     - name: API_GATEWAY_URL
       value: {{API_GATEWAY_URL}}
     - name: KTOR_ENV
       value: {{KTOR_ENV}}
+TOKEN_X_WELL_KNOWN_URL: {{TOKEN_X_WELL_KNOWN_URL}}

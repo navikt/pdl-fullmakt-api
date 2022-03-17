@@ -8,7 +8,7 @@ import io.prometheus.client.CollectorRegistry
 import io.prometheus.client.exporter.common.TextFormat
 
 
-const val INTERNAL = "/internal"
+const val INTERNAL = "/person/pdl-fullmakt-api/internal"
 const val IS_ALIVE = "/isAlive"
 const val IS_READY = "/isReady"
 const val METRICS = "/metrics"

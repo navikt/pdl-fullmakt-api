@@ -9,6 +9,7 @@ import io.ktor.jackson.JacksonConverter
 import io.ktor.request.*
 import io.ktor.routing.*
 import no.finn.unleash.FakeUnleash
+import no.nav.pdl.pdlfullmaktapi.config.ApplicationContext
 import no.nav.pdl.pdlfullmaktapi.routes.foedselsnummer
 import no.nav.pdl.pdlfullmaktapi.routes.internal
 
@@ -19,7 +20,7 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 data class ApplicationStatus(var running: Boolean = true, var initialized: Boolean = false)
 
 @Suppress("unused") // Referenced in application.conf
-fun Application.module(){
+fun Application.module(appContext: ApplicationContext = ApplicationContext()){
     val config = runBlocking{ environment.config.load() }
     val applicationStatus = ApplicationStatus()
     installAuthentication(config.tokenx)
