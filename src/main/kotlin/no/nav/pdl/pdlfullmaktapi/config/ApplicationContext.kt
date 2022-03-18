@@ -10,4 +10,7 @@ class ApplicationContext {
     val tokendingsService = TokendingsServiceBuilder.buildTokendingsService(maxCachedEntries = 10000)
     val tokendingsTokenFetcher = TokendingsTokenFetcher(tokendingsService, environment.fullmaktClientId)
 
+    val internalHttpClient = HttpClientBuilder.build()
+    val externalHttpClient = HttpClientBuilder.build(true)
+
 }

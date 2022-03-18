@@ -11,6 +11,7 @@ import io.ktor.routing.*
 import no.finn.unleash.FakeUnleash
 import no.nav.pdl.pdlfullmaktapi.config.ApplicationContext
 import no.nav.pdl.pdlfullmaktapi.routes.foedselsnummer
+import no.nav.pdl.pdlfullmaktapi.routes.fullmakt
 import no.nav.pdl.pdlfullmaktapi.routes.internal
 
 import org.slf4j.event.Level
@@ -21,6 +22,9 @@ data class ApplicationStatus(var running: Boolean = true, var initialized: Boole
 
 @Suppress("unused") // Referenced in application.conf
 fun Application.module(appContext: ApplicationContext = ApplicationContext()){
+    val baseUrl = "/person/pdl-fullmakt-api"
+    val appContext = ApplicationContext()
+
     val config = runBlocking{ environment.config.load() }
     val applicationStatus = ApplicationStatus()
     installAuthentication(config.tokenx)
@@ -31,7 +35,7 @@ fun Application.module(appContext: ApplicationContext = ApplicationContext()){
 
     install(CallLogging) {
         level = Level.TRACE
-        filter { call -> !call.request.path().startsWith("/internal") }
+        filter { call -> !call.request.path().startsWith("$baseUrl/internal") }
     }
 
     routing {
@@ -42,6 +46,7 @@ fun Application.module(appContext: ApplicationContext = ApplicationContext()){
                     enableAll()
                 }
                 print("It is dev environment")
+                fullmakt(baseUrl, appContext.externalHttpClient, "" )
             }
             isProd -> {
                 authenticate("tokenX"){
