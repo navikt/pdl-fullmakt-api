@@ -1,3 +1,6 @@
+Kode er flyttet til Mono-repo som ikke er åpen ennå, men vi jobber med det slik at det snart åpner.
+
+
 # pdl-fullmakt-api
 
 ## For NAV-ansatte
